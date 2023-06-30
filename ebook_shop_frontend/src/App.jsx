@@ -10,6 +10,7 @@ import BookPage from './pages/book';
 import Header from './components/Header';
 import Footer from './components/footer';
 import Home from './components/Home';
+import RegisterPage from './pages/register/register';
 
 
 const Layout = () => {
@@ -41,6 +42,10 @@ export default function App() {
         }
       ],
 
+    },
+    {
+      path: "/register",
+      element: <RegisterPage />,
     },
     {
       path: "/login",
