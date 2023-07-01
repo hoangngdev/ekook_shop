@@ -17,6 +17,7 @@ import { doGetAccountAction } from './redux/account/accountSlice';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminPage from './pages/admin';
 import Loading from './components/Loading';
+import NotFound from './components/NotFound';
 
 const Layout = () => {
   return (
