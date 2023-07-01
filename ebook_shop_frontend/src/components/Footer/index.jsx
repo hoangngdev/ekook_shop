@@ -1,8 +1,10 @@
+import './footer.scss';
+
 const Footer = () => {
     return (
-        <>
-            Footer
-        </>
+        <footer>
+            <div>Online Book Shop &copy; by Hoang Nguyen</div>
+        </footer>
     )
 }
 
