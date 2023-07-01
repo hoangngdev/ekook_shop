@@ -1,11 +1,26 @@
-import React from 'react';
-import { Button, Checkbox, Divider, Form, Input } from 'antd';
+import React, { useState } from 'react';
+import { Button, Checkbox, Divider, Form, Input, message, notification } from 'antd';
 import './register.scss';
-
+import { useNavigate } from 'react-router-dom';
+import { callRegister } from '../../services/api'
 const RegisterPage = () => {
 
+    const navigate = useNavigate();
+
     const onFinish = async (values) => {
-        console.log('Success:', values);
+        const { fullName, email, password, phone } = values;
+        const res = await callRegister(fullName, email, password, phone);
+        if (res?.data?._id) {
+            message.success('Account registration successful!');
+            navigate('/login')
+        } else {
+            notification.error({
+                message: "An error occurred",
+                description:
+                    res.message && Array.isArray(res.message) ? res.message[0] : res.message,
+                duration: 5
+            })
+        }
     };
 
 
@@ -30,7 +45,7 @@ const RegisterPage = () => {
                         >
                             <Form.Item
                                 label="Full Name:"
-                                name="fullname"
+                                name="fullName"
                                 rules={[{ required: true, message: 'Please input your full name!' }]}
                             >
                                 <Input />
