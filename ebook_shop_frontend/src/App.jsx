@@ -29,13 +29,23 @@ const Layout = () => {
   )
 }
 
+const LayoutAdmin = () => {
+  return (
+    <div className='layout-app'>
+      <Outlet />
+    </div>
+  )
+}
+
 export default function App() {
 
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(state => state.account.isAuthenticated)
 
   const getAccount = async () => {
-    if (window.location.pathname === 'login' || window.location.pathname === 'register') {
+    if (window.location.pathname === '/'
+      || window.location.pathname === '/login'
+      || window.location.pathname === '/register') {
       return;
     }
     const res = await callFetchAccount();
@@ -77,7 +87,7 @@ export default function App() {
     },
     {
       path: "/admin",
-      element: <Layout />,
+      element: <LayoutAdmin />,
       errorElement: <NotFound />,
 
       children: [
@@ -102,7 +112,10 @@ export default function App() {
 
   return (
     <>{isAuthenticated === true
-      || window.location.pathname === '/login' ?
+      || window.location.pathname === '/'
+      || window.location.pathname === '/login'
+      || window.location.pathname === '/register'
+      ?
       <RouterProvider router={router} />
       :
       <Loading />
